@@ -1,0 +1,139 @@
+*{
+    /*padding: margen interior*/
+    margin: 0; padding:0; box-sizing: border-box;
+}
+
+:root{
+    /*para definir las vaariables globales*/
+    --c-primario:#EDE0D7;
+    --c-secundario: #EBB599;
+    --c-terciario: #EAA07D;
+    --c-claro: #9C725C;
+    --c-oscuro: #724C3B;
+
+    /*dimensión del iframe*/
+    --iframe-width: 650px;
+    --iframe-height: 450px;
+}
+
+/* ========> Layout de la aplicaión con CSS Grid <===========*/
+.contenedor{
+    background: var(--c-primario);
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr 50px 50px;
+    overflow: hidden;
+}
+
+.header{
+    background: var(--c-secundario);
+    grid-column: 1 / 2;
+
+}
+
+.menu{
+    background: var(--c-terciario);
+    display: none;
+}
+
+.main{
+    background: var(--c-claro);
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+
+.footer{
+    background: var(--c-oscuro);
+    grid-column:1 / 2;
+    grid-row: 3 / 4;
+}
+
+/*Estilos para el contenido principal*/
+.main{
+    padding: 1em;
+}
+.main .instruccion{
+    background-color: var(--c-primario);
+    width:  90%;
+    /*margin 0 == no margen arriba ni abajo -- auto == margen igual a la der y la izq*/
+    margin: 0 auto;
+    border-radius: 15px;
+    border: 5px solid white;
+}
+
+.main .instruccion p{
+    margin: 0;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.main .contenedor-iframe{
+    width: 90;
+    margin: 0 auto;
+    margin-top: 0.5em;
+    border: 5px solid black;
+    text-align: center;
+    overflow-x: auto;
+}
+
+.main .contenedor-iframe iframe{
+    width: var(--iframe-width);
+    height: var(--iframe-height);
+}
+
+/*Estilos para la barra de navegación*/
+.nav * {
+    color:var(--c-oscuro);
+}
+
+.nav .nav-links li{
+    text-align: center;
+    margin: 0 auto;
+    transition: background 0.5s;
+    
+}             
+
+.nav .nav-links li:hover{
+    background: white;
+}
+
+.nav .nav-links li a {
+    display: block;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.nav .menu-open {
+    display: inline-block;
+    margin: 5px auto 5px 15px;
+  
+
+}
+.nav {
+    position: relative;
+}
+/*clase utilidad para los íconos*/
+.icono-grande{
+    font-size: 25px;
+    cursor: pointer;
+}
+.nav .nav-toggle {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+  
+}
+/* Normalización de las listas*/ 
+.lista-links{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.lista-links li a {
+    text-decoration: none;
+}
+
+
