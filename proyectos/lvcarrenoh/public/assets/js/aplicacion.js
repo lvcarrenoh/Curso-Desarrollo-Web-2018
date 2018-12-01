@@ -9,6 +9,9 @@ btnMenuClose.addEventListener("click",ocultarMenuLateral);
 btnNavToggle.addEventListener("click",toggleNavLinks);
 window.addEventListener("resize",arreglarNavLinks);
 
+//Cargar enlaces de actividades con AJAX
+document.addEventListener("DOMContentLoaded", cargarDatos);
+
 function mostrarMenuLateral(){
     menuLateral.classList.add("mostrar");
 }
@@ -28,22 +31,32 @@ function arreglarNavLinks(){
 }
 
 function cargarDatos(){
-    var datos = [
-        {url: "//unal.edu.co", nombre: "UNAL", instruccion: "Instrucción UNAL" },
-        {url: "//facebook.com", nombre: "FACEBOOK", instruccion: "Instrucción FACEBOOK" },
-        {url: "assets/uploads/actividades/actividad-normal", nombre: "DETERMINAR OPERACIÓN", instruccion: "Cuál signo es el correcto?" },
-        {url: "assets/uploads/actividades/actividad-canvas", nombre: "CANVAS", instruccion: "Actividad Canvas" }
-
-    ];
-
-    return datos;
+    var url = menuLateral.dataset.url;
+    var datos = [];
+    axios.get(url)
+        .then(function(res){
+            var actividades = res.data.actividades;
+            if(actividades.length>0) {
+                actividades.foreach(function(actividad){
+                    var obj = {
+                        url: actividad.rutaArchivo,
+                        nombre: actividad.nombre,
+                        instruccion: actividad.instruccion
+                    };
+                    datos.push(obj);
+                });
+            }
+        }).catch(function(err){
+            console.log(err.response);
+        }).finally(function(){
+            generarLinks(datos);
+        });
 }
 
-function generarLinks(){
+function generarLinks(links){
     var menuLinks = document.getElementById("menu-links");
     menuLinks.innerHTML = "";
 
-    var links = cargarDatos();
     if (links.length>0) {
         for (var i = 0; i < links.length; i++){
             var texto = document.createTextNode(links[i].nombre);
@@ -70,4 +83,4 @@ function generarLinks(){
 
 }
 
-generarLinks();
+

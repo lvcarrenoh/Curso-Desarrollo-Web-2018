@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends "plantillas/base.twig" %}
 
-<head>
-    <meta charset="UTF-8">
-    <!--UTF8 evita problemas con los acentos-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--viewport dice al navegador que trate el documento con
-    la ventana completa del computador-->
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Repositorio de Actividades Educativas</title>
-    <link rel="stylesheet" href="assets/css/estilos.css">
-    <link rel="stylesheet" href="assets/ext/feathericon/css/feathericon.min.css">
+{% block titulo %}Aplicación de Repositorio{% endblock  %}
 
-</head>
+{% block stylesheets %}
+    {{parent()}}
 
-<body>
+<link rel="stylesheet" href="{{ constant('APP_URL') }}assets/css/aplicacion.css">
+ 
+{% endblock %}
+
+{% block contenido %}
+    
     <div class="contenedor">
         <header class="header">
             <nav class="nav">
@@ -25,14 +21,14 @@
                     <i class="fe fe-bar"></i>
                 </span>
                 <ul class="nav-links lista-links" id="nav-links">
-                    <li><a href="#">Inicio</a></li>
+                    <li><a href="{{ path_for('inicio') }}">Inicio</a></li>
                     <li><a href="#">Contactos</a></li>
                     <li><a href="#">Nueva actividad</a></li>
                     <li><a href="#">Nueva actividad</a></li>
                 </ul>
             </nav>
         </header>
-        <div class="menu" id="menu-lateral">
+        <div class="menu" id="menu-lateral" data-url="{{ path_for('aplicacion.actividades')}}">
             <span class="menu-close" id="btn-menu-close">
                 <i class="fe fe-close"></i>
             </span>
@@ -53,12 +49,11 @@
                 <iframe id="iframe" name="main-iframe" src="https://angular.io"></iframe>
             </div>
         </section>
-        <footer class="footer">
-            <p>Hecho por: Laura Valentina Carreño Hurtado - &copy; 2018
-            </p>
-        </footer>
+        {% include "fragmentos/footer.twig" %}
     </div>
-    <script src="assets/js/script.js"></script>
-</body>
+{% endblock  %}
 
-</html>
+{% block javascripts %}
+ {{parent()}}
+    <script src="{{ constant('APP_URL') }}assets/js/aplicacion.js"></script>
+{% endblock  %}
